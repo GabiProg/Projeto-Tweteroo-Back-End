@@ -19,7 +19,7 @@ app.post("/tweets", (req, res) =>{
     
     const getAvatar = users.find(item => item.username === tweet.username);
     
-    tweets.push({
+    tweets.unshift({
         ...tweet,
         avatar: getAvatar.avatar
     });
@@ -28,7 +28,11 @@ app.post("/tweets", (req, res) =>{
 });
 
 app.get("/tweets", (req, res) =>{
-    res.send(tweets);
+    if(tweets.length <= 10){
+        res.send(tweets);
+    } else {
+        res.send(tweets.splice(0, 10));
+    }
 });
 
 app.listen(5000, () => console.log("Listening port on 5000"));
