@@ -31,7 +31,7 @@ app.get("/tweets", (req, res) =>{
     if(tweets.length <= 10){
         res.send(tweets);
     } else {
-        res.send(tweets.splice(0, 10));
+        res.send([...tweets].splice(0, 10));
     }
 });
 
